@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,18 +21,22 @@ public class CustomRecyclerView extends RecyclerView.Adapter<CustomRecyclerView.
     private LayoutInflater inflater;
 
     public CustomRecyclerView(Context context) {
-        inflater = co
+        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.personajes = PersonajeRepository.getInstance().getAll();
     }
 
     @NonNull
     @Override
     public CustomRecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View view = inflater.inflate(R.layout.simple_element, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CustomRecyclerView.ViewHolder holder, int position) {
+        Personaje personaje = personajes.get(position);
+
+        holder.nombre.setText(personaje.getCasa().getNombre());
 
     }
 
@@ -41,8 +47,8 @@ public class CustomRecyclerView extends RecyclerView.Adapter<CustomRecyclerView.
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private int imagen;
-        private String nombre;
+        private ImageView imagen;
+        private TextView nombre;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
