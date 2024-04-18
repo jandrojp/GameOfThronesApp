@@ -36,7 +36,8 @@ public class CustomRecyclerView extends RecyclerView.Adapter<CustomRecyclerView.
     public void onBindViewHolder(@NonNull CustomRecyclerView.ViewHolder holder, int position) {
         Personaje personaje = personajes.get(position);
 
-        holder.nombre.setText(personaje.getCasa().getNombre());
+        holder.casa.setText(personaje.getCasa().getNombre().toUpperCase());
+        holder.nombrePersonaje.setText(personaje.getNombre());
 
     }
 
@@ -48,13 +49,15 @@ public class CustomRecyclerView extends RecyclerView.Adapter<CustomRecyclerView.
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView imagen;
-        private TextView nombre;
+        private TextView casa;
+        private TextView nombrePersonaje;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imagen = itemView.findViewById(R.id.imageView);
-            nombre = itemView.findViewById(R.id.descripcion);
+            casa = itemView.findViewById(R.id.casa);
+            nombrePersonaje = itemView.findViewById(R.id.nombrePersonaje);
         }
     }
 }

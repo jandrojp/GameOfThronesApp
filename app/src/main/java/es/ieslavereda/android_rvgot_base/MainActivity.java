@@ -35,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
 
+        CustomRecyclerView customRecyclerView = new CustomRecyclerView(this);
+        recyclerView.setAdapter(customRecyclerView);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
      }
 }
