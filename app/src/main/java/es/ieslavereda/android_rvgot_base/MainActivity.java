@@ -1,30 +1,15 @@
 package es.ieslavereda.android_rvgot_base;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.Switch;
-import android.widget.Toast;
-
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import es.ieslavereda.android_rvgot_base.model.Personaje;
 import es.ieslavereda.android_rvgot_base.model.PersonajeRepository;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private RecyclerView recyclerView;
 
@@ -37,7 +22,19 @@ public class MainActivity extends AppCompatActivity {
 
         CustomRecyclerView customRecyclerView = new CustomRecyclerView(this);
         recyclerView.setAdapter(customRecyclerView);
+        customRecyclerView.setOnClickListener(this);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
      }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(this, SecondActivity.class);
+        Personaje personaje = PersonajeRepository.getInstance().get(recyclerView.getChildAdapterPosition(v));
+
+        intent.putExtra("escudo", personaje.getCasa().getEscudo());
+        intent.putExtra("casa", personaje.getCasa().getNombre().toUpperCase());
+        intent.putExtra("nombrePersonaje", personaje.getNombre().toUpperCase());
+        startActivity(intent);
+    }
 }

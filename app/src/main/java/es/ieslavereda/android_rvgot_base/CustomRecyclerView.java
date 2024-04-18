@@ -19,6 +19,7 @@ public class CustomRecyclerView extends RecyclerView.Adapter<CustomRecyclerView.
 
     private List<Personaje> personajes;
     private LayoutInflater inflater;
+    private View.OnClickListener onClickListener;
 
     public CustomRecyclerView(Context context) {
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -29,13 +30,19 @@ public class CustomRecyclerView extends RecyclerView.Adapter<CustomRecyclerView.
     @Override
     public CustomRecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.simple_element, parent, false);
+        view.setOnClickListener(onClickListener);
         return new ViewHolder(view);
+    }
+
+    public void setOnClickListener(View.OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
     }
 
     @Override
     public void onBindViewHolder(@NonNull CustomRecyclerView.ViewHolder holder, int position) {
         Personaje personaje = personajes.get(position);
 
+        holder.imagen.setImageResource(personaje.getCasa().getEscudo());
         holder.casa.setText(personaje.getCasa().getNombre().toUpperCase());
         holder.nombrePersonaje.setText(personaje.getNombre());
 
