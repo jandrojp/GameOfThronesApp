@@ -3,6 +3,9 @@ package es.ieslavereda.android_rvgot_base;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.Switch;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +15,7 @@ import es.ieslavereda.android_rvgot_base.model.PersonajeRepository;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private RecyclerView recyclerView;
+    private Switch switchSort;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,11 +23,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         recyclerView = findViewById(R.id.recyclerView);
+        switchSort = findViewById(R.id.switchSort);
 
         CustomRecyclerView customRecyclerView = new CustomRecyclerView(this);
         recyclerView.setAdapter(customRecyclerView);
         customRecyclerView.setOnClickListener(this);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+
+        switchSort.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                PersonajeRepository.getInstance().sort(Personaje.SORT_BY_NAME);
+                switchSort.setText("Nombre");
+            } else {
+                PersonajeRepository.getInstance().sort(Personaje.SORT_BY_CASA);
+                switchSort.setText("Casa");
+            }
+
+            customRecyclerView.notifyDataSetChanged();
+        });
 
      }
 
