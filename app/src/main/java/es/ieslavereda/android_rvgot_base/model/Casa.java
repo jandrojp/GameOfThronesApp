@@ -1,8 +1,9 @@
 package es.ieslavereda.android_rvgot_base.model;
 
+import es.ieslavereda.android_rvgot_base.Listable;
 import es.ieslavereda.android_rvgot_base.R;
 
-public enum Casa {
+public enum Casa implements Listable {
 
     ARRYN("Arryn", R.mipmap.ic_arryn_foreground),
     BARATHEON("Baratheon", R.mipmap.ic_baratheon_foreground),
@@ -26,6 +27,16 @@ public enum Casa {
     }
 
     public int getEscudo() {
+        return escudo;
+    }
+
+    @Override
+    public String getDescription() {
+        return this.name();
+    }
+
+    @Override
+    public int getDrawableSymbol() {
         return escudo;
     }
 }

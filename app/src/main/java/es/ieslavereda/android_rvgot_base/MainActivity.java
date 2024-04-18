@@ -3,6 +3,7 @@ package es.ieslavereda.android_rvgot_base;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
@@ -16,6 +17,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private RecyclerView recyclerView;
     private Switch switchSort;
+    private Button buttonAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         recyclerView = findViewById(R.id.recyclerView);
         switchSort = findViewById(R.id.switchSort);
+        buttonAdd = findViewById(R.id.buttonAdd);
 
         CustomRecyclerView customRecyclerView = new CustomRecyclerView(this);
         recyclerView.setAdapter(customRecyclerView);
@@ -40,6 +43,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             customRecyclerView.notifyDataSetChanged();
+        });
+
+
+
+        buttonAdd.setOnClickListener( v -> {
+            Intent intent = new Intent(this, AnyadirUsuario.class);
+            startActivity(intent);
         });
 
      }

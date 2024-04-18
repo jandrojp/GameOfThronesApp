@@ -25,6 +25,10 @@
         <activity
             android:name=".SecondActivity">
         </activity>
+
+        <activity
+            android:name=".AnyadirUsuario">
+        </activity>
     </application>
 
 </manifest>

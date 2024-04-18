@@ -2,6 +2,7 @@ package es.ieslavereda.android_rvgot_base;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,7 +14,7 @@ public class SecondActivity extends AppCompatActivity {
     private ImageView imagen;
     private TextView casa;
     private TextView nombrePersonaje;
-    private ImageButton buttonReturn;
+    private Button buttonReturn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
